@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data Produk</title>
+    <style>
+        body {
+            font-family: Arial, Lucida;
+            background-image: url("C:/Users/sajid/OneDrive/Pictures/IMG_4141.JPG");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 10px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        .form-container h2 {
+            text-align: center;
+            font-family: 'Cursive', Lucida;
+            color: #000000;
+        }
+        .form-container label {
+            font-weight: bold;
+            font-family: 'Cursive', Lucida;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container textarea,
+        .form-container select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container input[type="radio"],
+        .form-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .form-container input[type="submit"],
+        .form-container input[type="reset"] {
+            background-color: #295dcc;
+            color: white;
+            padding: 10px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container input[type="reset"] {
+            background-color: #dc3545;
+        }
+        .form-container input[type="submit"]:hover,
+        .form-container input[type="reset"]:hover {
+            background-color: #218838;
+        }
+        .form-container input[type="reset"]:hover {
+            background-color: #c82333;
+        }
+        .form-container .inline-options {
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+        }
+        .form-container .inline-options label {
+            margin-bottom: 0;
+        }
+    </style>
+        <script src="validateNamaProduk.js"></script>
+        <script src="validateDeskripsiProduk.js"></script>
+        <script src="validateKategori.js"></script>
+        <script src="validateSubKategori.js"></script>
+        <script src="validateHargaSatuan.js"></script>
+        <script src="validateGrosir.js"></script>
+        <script src="validateJasaKirim.js"></script>
+        <script src="validateCaptcha.js"></script>
+        <script src="generateCaptcha.js"></script>
+        <script src="updateSubKategori.js"></script>
+        <script src="validateForm.js"></script>
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>Form Tambah Data Produk</h2>
+            <form onsubmit="return validateForm()" method="post">
+                <label for="nama_produk">Nama Produk:</label>
+                <input type="text" id="nama_produk" name="nama_produk" required>
+
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea id="deskripsi" name="deskripsi" rows="4" cols="50" required></textarea>
+
+                <label for="kategori">Kategori:</label>
+                <select id="kategori" name="kategori" required onchange="updateSubKategori()">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+
+                <label for="sub_kategori">Sub Kategori:</label>
+                <select id="sub_kategori" name="sub_kategori" required>
+                    <option value="">--Pilih Sub Kategori--</option>
+                </select>
+
+                <label for="harga_satuan">Harga Satuan:</label>
+                <input type="number" id="harga_satuan" name="harga_satuan" required>
+
+                <label>Grosir:</label>
+                <div class="inline-options">
+                    <input type="radio" id="grosir_ya" name="grosir" value="ya" required>
+                    <label for="grosir_ya">Ya</label>
+                    <input type="radio" id="grosir_tidak" name="grosir" value="tidak" required>
+                    <label for="grosir_tidak">Tidak</label>
+                </div>
+                
+                <label for="harga_grosir">Harga Grosir:</label>
+                <input type="number" id="harga_grosir" name="harga_grosir">
+
+                <label>Jasa Kirim:</label>
+                <div class="inline-options">
+                    <input type="checkbox" id="jne" name="jasa_kirim[]" value="JNE">
+                    <label for="jne">JNE</label>
+                    <input type="checkbox" id="tiki" name="jasa_kirim[]" value="TIKI">
+                    <label for="tiki">TIKI</label>
+                    <input type="checkbox" id="sicepat" name="jasa_kirim[]" value="SiCepat">
+                    <label for="sicepat">SiCepat</label>
+                    <input type="checkbox" id="ninja" name="jasa_kirim[]" value="Ninja Express">
+                    <label for="ninja">Ninja Express</label>
+                    <input type="checkbox" id="wahana" name="jasa_kirim[]" value="Wahana">
+                    <label for="wahana">Wahana</label>
+                </div>
+
+
+                <label for="captcha">Captcha:</label>
+                <input type="text" id="captcha" name="captcha" readonly>
+                <input type="text" id="captcha_input" name="captcha_input" required>
+
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </form>
+        </div>
+    </body>
+</html>
